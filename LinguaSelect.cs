@@ -26,6 +26,7 @@ static class Program {
   if(args.Contains("--preview")) { GlassWindow.Preview(); return; }
   if(args.Contains("--ui-test")) { GlassWindow.UiTests(); return; }
   if(args.Contains("--native-preview")) { GlassWindow.NativePreview(); return; }
+  if(args.Contains("--theme-preview")) { GlassWindow.ThemePreview(); return; }
   if(args.Contains("--self-test")) { Tests.Run(args.Contains("--network")); return; }
   bool first; using(var mutex = new Mutex(true,"Local\\LinguaSelect.Desktop",out first)) {
    if(!first) { MessageBox.Show("划词助手已在运行，请在系统托盘中打开。", "LinguaSelect"); return; }
@@ -40,6 +41,7 @@ public class Settings {
  public bool Automatic=true, Instant=true; public int Target=0;
  public bool ShowOriginal=true, ShowPhonetic=true, ShowTranslation=true, ShowDetails=true, ShowExamples=true, ShowStructure=true, Compact=true;
  public int GlassTint=150;
+ public string ThemeId="ios";
  public static string PathName { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"LinguaSelect","settings.json"); } }
  [ScriptIgnore] public string Key { get { try { return Encoding.UTF8.GetString(ProtectedData.Unprotect(Convert.FromBase64String(Secret),null,DataProtectionScope.CurrentUser)); } catch { return ""; } } }
  public void SetKey(string key) { Secret=Convert.ToBase64String(ProtectedData.Protect(Encoding.UTF8.GetBytes(key),null,DataProtectionScope.CurrentUser)); }

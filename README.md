@@ -6,7 +6,7 @@
 
 ## 下载与运行
 
-在本仓库的 **Releases** 下载 `LinguaSelect-v2.2.0-Windows.zip`，解压后双击 `LinguaSelect.exe`。
+在本仓库的 **Releases** 下载 `LinguaSelect-v2.3.0-Windows.zip`，解压后双击 `LinguaSelect.exe`。
 
 - Windows 10 / 11，需 .NET Framework 4.8。
 - Windows 11 22H2 及以后支持系统 Acrylic 背景；其他环境使用半透明卡片回退。
@@ -17,6 +17,7 @@
 - 划词后直接查询，不抢走原软件焦点。
 - 翻译、音标、系统语音朗读、词典释义、双语例句和 AI 句式解析。
 - 原文、音标、译文、释义、例句、句式六个模块独立开关。
+- 六套主题：默认 iOS 玻璃、咱们裸熊、Hello Kitty 和伙伴、Google Material、卡通涂鸦、Chiikawa。主题即时切换并自动保存。
 - 紧凑布局、玻璃浓度调节、固定卡片与手动输入。
 - OpenAI、DeepSeek、Qwen 模型与接口预设：选择分类后只需填写 API Key。
 - 密钥通过 Windows DPAPI 按用户加密保存，不同服务分别存储。
@@ -24,6 +25,12 @@
 ![Interface preview with example content](界面预览.png)
 
 预览由实际界面控件和示例文本生成，不是实时翻译结果。原生窗口样式截图见 [native-edge-preview.png](native-edge-preview.png)。
+
+## 卡片主题
+
+右上角「自定义」→「卡片主题」即可切换。每套包含配色、控件样式和内置 SVG 装饰；角色与品牌主题为非官方设计。
+
+![六套卡片主题，使用示例文本](主题总览.png)
 
 ## 使用
 
@@ -85,5 +92,6 @@ Start-Process .\LinguaSelect.exe -ArgumentList '--ui-test' -Wait
 - `ServicePresets.cs`：服务商、模型与参数预设。
 - `assets/logo.png` / `assets/app.ico`：应用 Logo 与多尺寸 Windows 图标。
 - `icons.svg`：操作图标。
+- `Themes.cs` / `themes.svg`：主题配置与矢量装饰；`--theme-preview` 生成六套主题预览。
 
 详细说明见 [使用说明.md](使用说明.md)。项目尚未指定开源许可证。

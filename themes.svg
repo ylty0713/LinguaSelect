@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 80">
+ <symbol id="ios" viewBox="0 0 180 80">
+  <circle cx="83" cy="40" r="29" fill="#DDE8FF"/><circle cx="116" cy="43" r="22" fill="#C8DAFF"/><path d="M94 18 Q94 41 117 41 Q94 41 94 64 Q94 41 71 41 Q94 41 94 18Z" fill="#FFFFFF"/>
+ </symbol>
+ <symbol id="bears" viewBox="0 0 180 80">
+  <ellipse cx="91" cy="74" rx="72" ry="4" fill="#DAC9B0"/>
+  <circle cx="22" cy="35" r="10" fill="#AC784E" stroke="#614B39"/><circle cx="63" cy="35" r="10" fill="#AC784E" stroke="#614B39"/>
+  <path d="M16 50 Q15 29 42 29 Q70 29 70 51 L69 69 Q43 79 17 69Z" fill="#BA875B" stroke="#614B39"/>
+  <ellipse cx="43" cy="59" rx="13" ry="10" fill="#DDC19D"/><circle cx="30" cy="50" r="2.2" fill="#49382C"/><circle cx="55" cy="50" r="2.2" fill="#49382C"/><ellipse cx="43" cy="56" rx="4" ry="3" fill="#49382C"/><path d="M43 59 L43 63 M39 63 Q43 67 47 63" stroke="#49382C"/>
+  <circle cx="70" cy="27" r="10" fill="#423C39"/><circle cx="113" cy="27" r="10" fill="#423C39"/>
+  <path d="M65 46 Q63 21 92 22 Q119 22 119 46 L118 68 Q94 77 65 68Z" fill="#FFFCF3" stroke="#6D6257"/>
+  <ellipse cx="79" cy="46" rx="8" ry="10" fill="#423C39"/><ellipse cx="105" cy="46" rx="8" ry="10" fill="#423C39"/><circle cx="80" cy="45" r="2" fill="#FFFFFF"/><circle cx="104" cy="45" r="2" fill="#FFFFFF"/><ellipse cx="92" cy="55" rx="4" ry="3" fill="#423C39"/><path d="M87 62 Q92 66 97 62" stroke="#423C39"/>
+  <circle cx="123" cy="35" r="9" fill="#FFFFFF" stroke="#8B857A"/><circle cx="162" cy="35" r="9" fill="#FFFFFF" stroke="#8B857A"/>
+  <path d="M118 51 Q117 29 142 29 Q168 29 169 52 L168 69 Q143 78 119 69Z" fill="#FFFDF7" stroke="#8B857A"/><circle cx="131" cy="51" r="2.1" fill="#4D4843"/><circle cx="154" cy="51" r="2.1" fill="#4D4843"/><ellipse cx="143" cy="58" rx="4" ry="3" fill="#4D4843"/><path d="M139 65 L147 65" stroke="#4D4843"/>
+ </symbol>
+ <symbol id="kitty" viewBox="0 0 180 80">
+  <path d="M10 54 Q8 28 20 18 L19 7 Q28 3 34 21 L42 20 Q53 2 59 9 L56 29 Q68 44 61 65 Q37 79 14 65Z" fill="#F39EBE" stroke="#AC5F83"/>
+  <ellipse cx="37" cy="51" rx="22" ry="18" fill="#FFFDF4"/><circle cx="29" cy="50" r="2" fill="#674453"/><circle cx="46" cy="50" r="2" fill="#674453"/><ellipse cx="37" cy="58" rx="3" ry="2" fill="#F2CA6C"/>
+  <path d="M61 46 L62 21 L78 29 Q91 24 105 29 L120 21 L122 47 Q133 69 94 73 Q56 73 61 46Z" fill="#FFFEFA" stroke="#73596A"/>
+  <circle cx="78" cy="49" r="2.5" fill="#4E3C46"/><circle cx="107" cy="49" r="2.5" fill="#4E3C46"/><ellipse cx="93" cy="58" rx="4" ry="3" fill="#EDC861"/>
+  <path d="M63 47 L52 44 M62 54 L51 55 M64 61 L55 65 M121 47 L132 44 M122 54 L133 55 M120 61 L129 65" stroke="#73596A"/>
+  <path d="M101 27 Q99 13 110 17 L116 22 Q129 14 128 27 Q128 35 117 31 Q105 37 101 27Z" fill="#EF678C" stroke="#B8446C"/><circle cx="115" cy="26" r="4" fill="#F99ABD" stroke="#B8446C"/>
+  <path d="M132 38 L127 12 L143 24 L158 24 L174 12 L170 43 Q176 73 151 73 Q125 73 132 38Z" fill="#55455D" stroke="#55455D"/>
+  <ellipse cx="151" cy="55" rx="20" ry="16" fill="#FFF8F1"/><circle cx="143" cy="53" r="2" fill="#594451"/><circle cx="159" cy="53" r="2" fill="#594451"/><path d="M147 61 Q151 65 155 61" stroke="#594451"/>
+  <circle cx="150" cy="33" r="6" fill="#EE9ABC"/><circle cx="148" cy="32" r="1.3" fill="#55455D"/><circle cx="153" cy="32" r="1.3" fill="#55455D"/><path d="M147 38 L153 38" stroke="#EE9ABC" stroke-width="3"/>
+ </symbol>
+ <symbol id="google" viewBox="0 0 180 80">
+  <rect x="20" y="23" width="40" height="40" rx="12" fill="#4285F4"/><circle cx="74" cy="25" r="17" fill="#EA4335"/>
+  <path d="M85 63 L107 23 L129 63Z" fill="#FBBC05"/><rect x="131" y="34" width="27" height="27" rx="13.5" fill="#34A853"/>
+  <path d="M31 43 L39 51 L51 36" stroke="#FFFFFF" stroke-width="3"/><circle cx="150" cy="16" r="4" fill="#4285F4"/>
+ </symbol>
+ <symbol id="doodle" viewBox="0 0 180 80">
+  <path d="M20 24 L35 16 L44 32 L34 45 L18 39Z" fill="#D7CBFF" stroke="#35312C" stroke-width="2.4"/>
+  <path d="M25 7 L27 13 M9 24 L15 26 M51 18 L46 22" stroke="#35312C" stroke-width="2.4"/>
+  <path d="M74 15 L81 32 L99 34 L85 45 L89 64 L73 54 L57 64 L61 45 L48 34 L66 32Z" fill="#FFD95B" stroke="#35312C" stroke-width="2.4"/>
+  <path d="M68 37 L68 41 M80 37 L80 41 M68 47 Q74 53 81 46" stroke="#35312C" stroke-width="2.4"/>
+  <path d="M114 18 Q145 10 159 33 Q175 57 144 66 Q116 72 112 49 Q107 33 114 18Z" fill="#FFACB6" stroke="#35312C" stroke-width="2.4"/>
+  <path d="M128 33 L128 38 M144 30 L145 35 M127 47 Q139 58 150 44 M105 67 Q112 60 119 68 M160 12 L163 19 M169 24 L175 21" stroke="#35312C" stroke-width="2.4"/>
+ </symbol>
+ <symbol id="chiikawa" viewBox="0 0 180 80">
+  <circle cx="19" cy="34" r="9" fill="#FFFDF8" stroke="#907B73"/><circle cx="51" cy="34" r="9" fill="#FFFDF8" stroke="#907B73"/>
+  <path d="M9 50 Q8 28 35 28 Q62 29 62 52 Q62 75 35 75 Q8 75 9 50Z" fill="#FFFDF8" stroke="#907B73"/>
+  <circle cx="25" cy="49" r="3" fill="#665650"/><circle cx="45" cy="49" r="3" fill="#665650"/><ellipse cx="17" cy="57" rx="6" ry="3" fill="#F4BBBD"/><ellipse cx="53" cy="57" rx="6" ry="3" fill="#F4BBBD"/><path d="M31 56 Q35 60 39 56 M35 58 L35 62" stroke="#907B73"/>
+  <path d="M68 39 L68 20 L82 30 Q92 25 103 29 L118 20 L118 43 Q130 74 94 75 Q60 74 68 39Z" fill="#A7D2EA" stroke="#7F99A7"/>
+  <path d="M69 48 Q80 45 83 35 Q94 48 118 45 L118 58 Q115 74 94 74 Q70 74 69 56Z" fill="#FFFEF8"/>
+  <circle cx="83" cy="51" r="3" fill="#665650"/><circle cx="106" cy="51" r="3" fill="#665650"/><path d="M89 59 Q94 64 100 59" stroke="#907B73"/><ellipse cx="76" cy="59" rx="5" ry="3" fill="#F4BBBD"/><ellipse cx="112" cy="59" rx="5" ry="3" fill="#F4BBBD"/>
+  <path d="M134 33 Q124 5 133 3 Q144 4 145 30 L153 29 Q152 2 161 3 Q171 7 163 36 Q177 48 169 66 Q151 82 130 68 Q117 47 134 33Z" fill="#FFE9B3" stroke="#A28B65"/>
+  <path d="M134 10 L139 27 M160 10 L158 27" stroke="#EDB8A1" stroke-width="3"/><circle cx="140" cy="49" r="2.7" fill="#665650"/><circle cx="159" cy="49" r="2.7" fill="#665650"/><path d="M144 57 Q149 53 154 57 Q154 66 149 67 Q144 65 144 57Z" fill="#E7A29B" stroke="#907B73"/><ellipse cx="133" cy="58" rx="5" ry="3" fill="#F4BBBD"/><ellipse cx="166" cy="58" rx="5" ry="3" fill="#F4BBBD"/>
+ </symbol>
+</svg>

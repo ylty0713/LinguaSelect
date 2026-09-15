@@ -1,0 +1,13 @@
+*.exe
+*.pdb
+*.zip
+bin/
+obj/
+work/
+.vs/
+settings.json
+.env
+.env.*
+test-results.txt
+ui-test-results.txt
+*-before-*.exe

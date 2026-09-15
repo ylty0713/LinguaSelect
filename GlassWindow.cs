@@ -135,17 +135,34 @@ class GlassWindow : Window {
   Foreground=Themes.Brush(theme.Ink);FontFamily=new FontFamily(theme.Font);foreach(var pen in iconPens){pen.Brush=Themes.Brush(theme.Muted);pen.Thickness=theme.Id=="doodle"?2.1:1.65;}
   var example=Find<Border>("ExampleSurface");example.CornerRadius=new CornerRadius(theme.Id=="google"?18:theme.Id=="doodle"?5:12);example.BorderThickness=new Thickness(theme.Id=="doodle"?1.7:1);
   Find<Image>("ThemeArt").Source=Themes.Illustration(theme.Id);Find<Border>("ThemeBanner").Background=Themes.Brush(theme.Id=="bears"?"#FFFDF6":theme.Id=="kitty"||theme.Id=="chiikawa"?"#FFFFFF":theme.Panel);Set("ThemeName",theme.Name);Set("ThemeSubtitle",theme.Subtitle);Visible("ThemeBanner",theme.Id!="ios");
-  Find<TextBlock>("Original").FontWeight=theme.Id=="google"?FontWeights.Medium:FontWeights.SemiBold;
+  ApplyTypography(theme);
   if(pinButton!=null)pinButton.Background=pinned?Themes.Brush(theme.Soft):Brushes.Transparent;if(settingsButton!=null)settingsButton.Background=preferences?Themes.Brush(theme.Soft):Brushes.Transparent;
   foreach(var b in themeButtons){var t=(CardTheme)b.Tag;b.Background=Themes.Brush(t.Id==theme.Id?t.Soft:t.Panel);var text=((StackPanel)((Grid)b.Content).Children[1]).Children[0] as TextBlock;text.Text=t.Name+(t.Id==theme.Id?" ✓":"");}
   shell.Padding=cfg.Compact?new Thickness(20,14,20,13):new Thickness(24,20,24,20);Width=cfg.Compact?400:440;
-  Find<TextBlock>("Details").FontSize=cfg.Compact?12:14;Find<TextBlock>("Examples").FontSize=cfg.Compact?12:14;
   if(initialized)Fit();
+ }
+ void ApplyTypography(CardTheme theme){
+  var type=Themes.Typography(theme.Id);var title=new FontFamily(type.Title);var body=new FontFamily(type.Body);var ui=new FontFamily(type.UI);
+  FontFamily=ui;shell.Resources["BodyFont"]=body;shell.Resources["UiFont"]=ui;
+  TextOptions.SetTextFormattingMode(shell,TextFormattingMode.Display);TextOptions.SetTextRenderingMode(shell,TextRenderingMode.Grayscale);
+  var original=Find<TextBlock>("Original");original.FontFamily=title;original.FontSize=type.Heading+(cfg.Compact?0:2);original.FontWeight=type.Weight;original.LineHeight=original.FontSize+8;
+  var translation=Find<TextBlock>("Translation");translation.FontFamily=body;translation.FontSize=type.Translation;translation.FontWeight=theme.Id=="bears"?FontWeights.Bold:FontWeights.Medium;translation.LineHeight=type.Translation+9;
+  foreach(var name in new[]{"Details","Examples","Structure"}){var text=Find<TextBlock>(name);text.FontFamily=body;text.FontSize=type.BodySize+(cfg.Compact?0:1);text.LineHeight=type.Leading+(cfg.Compact?0:2);}
+  Find<TextBlock>("Phonetic").FontFamily=new FontFamily("Segoe UI, Microsoft YaHei UI");Find<TextBlock>("Phonetic").FontSize=12;
+  foreach(var name in new[]{"ThemeName","PreferencesTitle"}){var text=Find<TextBlock>(name);text.FontFamily=title;text.FontWeight=type.Weight;text.FontSize=name=="ThemeName"?12:21;}
+  Find<TextBlock>("ThemeSubtitle").FontFamily=ui;Find<TextBlock>("ThemeSubtitle").FontSize=11;
+  foreach(var name in new[]{"DetailsCaption","ExamplesCaption","StructureCaption"}){
+   var label=Find<TextBlock>(name);bool chip=theme.Id=="kitty"||theme.Id=="chiikawa"||theme.Id=="bears";
+   label.FontFamily=ui;label.FontSize=theme.Id=="doodle"?12:11;label.FontWeight=FontWeights.Bold;label.Foreground=Themes.Brush(theme.Id=="ios"?theme.Muted:theme.Accent);
+   label.Background=chip?Themes.Brush(theme.Soft):Brushes.Transparent;label.Padding=chip?new Thickness(6,2,6,2):new Thickness(0);label.HorizontalAlignment=HorizontalAlignment.Left;
+   label.TextDecorations=theme.Id=="doodle"?TextDecorations.Underline:null;
+  }
+  foreach(var name in new[]{"Endpoint","Model","Input"})Find<TextBox>(name).FontFamily=new FontFamily("Segoe UI, Microsoft YaHei UI");
  }
  void TogglePreferences(bool? value=null){preferences=value??!preferences;Visible("Preferences",preferences);Visible("Reading",!preferences);settingsButton.Background=preferences?(Brush)shell.Resources["AccentSoftBrush"]:Brushes.Transparent;Set("Mode",preferences?" /  个性化":" /  划词即译");Fit();}
  void SetupThemeGallery(){
   foreach(var theme in Themes.All){var t=theme;var grid=new Grid();grid.ColumnDefinitions.Add(new ColumnDefinition {Width=new GridLength(58)});grid.ColumnDefinitions.Add(new ColumnDefinition());grid.Children.Add(new Image {Source=Themes.Illustration(t.Id),Width=57,Height=42});
-   var labels=new StackPanel {VerticalAlignment=VerticalAlignment.Center,Margin=new Thickness(5,0,0,0)};labels.Children.Add(new TextBlock {Text=t.Name,FontSize=10,FontWeight=FontWeights.SemiBold,Foreground=Themes.Brush(t.Ink),TextWrapping=TextWrapping.Wrap});labels.Children.Add(new TextBlock {Text=t.Id=="ios"?"默认主题":"整套配色与装饰",FontSize=9,Foreground=Themes.Brush(t.Muted),Margin=new Thickness(0,4,0,0)});Grid.SetColumn(labels,1);grid.Children.Add(labels);
+   var labels=new StackPanel {VerticalAlignment=VerticalAlignment.Center,Margin=new Thickness(5,0,0,0)};labels.Children.Add(new TextBlock {Text=t.Name,FontFamily=new FontFamily(Themes.Typography(t.Id).UI),FontSize=10,FontWeight=FontWeights.SemiBold,Foreground=Themes.Brush(t.Ink),TextWrapping=TextWrapping.Wrap});labels.Children.Add(new TextBlock {Text=Themes.Typography(t.Id).Label,FontFamily=new FontFamily(Themes.Typography(t.Id).UI),FontSize=9,Foreground=Themes.Brush(t.Muted),Margin=new Thickness(0,4,0,0)});Grid.SetColumn(labels,1);grid.Children.Add(labels);
    var button=new Button {Content=grid,Tag=t,Width=156,Height=64,Margin=new Thickness(0,0,8,8),Padding=new Thickness(6),ToolTip=t.Name+" · "+t.Subtitle};button.Click+=(s,e)=>{cfg.ThemeId=t.Id;ApplyAppearance();Save();};themeButtons.Add(button);Find<WrapPanel>("ThemeGallery").Children.Add(button);
   }
  }

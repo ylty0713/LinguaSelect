@@ -12,6 +12,21 @@ public class CardTheme {
  public CardTheme(string id,string name,string subtitle,string top,string bottom,string ink,string muted,string accent,string soft,string panel,string line,string font="Segoe UI, Microsoft YaHei UI") {Id=id;Name=name;Subtitle=subtitle;Top=top;Bottom=bottom;Ink=ink;Muted=muted;Accent=accent;Soft=soft;Panel=panel;Line=line;Font=font;}
 }
 static class Themes {
+ public sealed class TypeStyle {
+  public string Title,Body,UI,Label; public double Heading,Translation,BodySize,Leading; public FontWeight Weight;
+  public TypeStyle(string title,string body,string ui,string label,double heading,double translation,double size,double leading,FontWeight weight){Title=title;Body=body;UI=ui;Label=label;Heading=heading;Translation=translation;BodySize=size;Leading=leading;Weight=weight;}
+ }
+ public static TypeStyle Typography(string id){
+  const string fallback=", Microsoft YaHei UI, 微软雅黑, Segoe UI";
+  switch(id){
+   case "bears": return new TypeStyle("Trebuchet MS, YouYuan, 幼圆"+fallback,"Trebuchet MS, YouYuan, 幼圆"+fallback,"Trebuchet MS, YouYuan, 幼圆"+fallback,"厚实圆润",26,21,13,21,FontWeights.Bold);
+   case "kitty": return new TypeStyle("Arial Rounded MT Bold, YouYuan, 幼圆"+fallback,"Segoe UI, YouYuan, 幼圆"+fallback,"Arial, YouYuan, 幼圆"+fallback,"甜美圆体",25,21,13,21,FontWeights.Normal);
+   case "google": return new TypeStyle("Bahnschrift, Segoe UI, DengXian, 等线"+fallback,"Segoe UI, DengXian, 等线"+fallback,"Segoe UI, DengXian, 等线"+fallback,"几何清晰",27,20,13,21,FontWeights.Medium);
+   case "doodle": return new TypeStyle("Comic Sans MS, KaiTi, 楷体"+fallback,"Comic Sans MS, KaiTi, 楷体"+fallback,"Comic Sans MS, KaiTi, 楷体"+fallback,"手写便签",25,22,14,23,FontWeights.Bold);
+   case "chiikawa": return new TypeStyle("Arial Rounded MT Bold, YouYuan, 幼圆"+fallback,"Trebuchet MS, YouYuan, 幼圆"+fallback,"Trebuchet MS, YouYuan, 幼圆"+fallback,"柔软圆润",24,21,13,22,FontWeights.Normal);
+   default: return new TypeStyle("Segoe UI Variable Display, Segoe UI"+fallback,"Segoe UI Variable Text, Segoe UI"+fallback,"Segoe UI Variable Text, Segoe UI"+fallback,"清透简约",25,20,12.5,20,FontWeights.SemiBold);
+  }
+ }
  public static readonly CardTheme[] All={
   new CardTheme("ios","iOS 玻璃","清透、轻盈、专注","#FFFFFF","#EEF3FD","#242832","#737D8E","#3478F6","#DEE9FF","#B8FFFFFF","#23748195"),
   new CardTheme("bears","咱们裸熊","和三只熊一起慢慢学","#FFF9EF","#EFE6D6","#493A30","#88735E","#A76F42","#ECD8BD","#D9FFFDF6","#38A68565"),

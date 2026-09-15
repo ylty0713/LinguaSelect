@@ -6,7 +6,7 @@
 
 ## 下载与运行
 
-在本仓库的 **Releases** 下载 `LinguaSelect-v2.3.1-Windows.zip`，解压后双击 `LinguaSelect.exe`。
+在本仓库的 **Releases** 下载 `LinguaSelect-v2.4.0-Windows.zip`，解压后双击 `LinguaSelect.exe`。
 
 - Windows 10 / 11，需 .NET Framework 4.8。
 - Windows 11 22H2 及以后支持系统 Acrylic 背景；其他环境使用半透明卡片回退。
@@ -28,7 +28,7 @@
 
 ## 卡片主题
 
-右上角「自定义」→「卡片主题」即可切换。每套包含配色、控件样式和内置插画。咱们裸熊、Hello Kitty 和伙伴、Chiikawa 使用 AI 生成的 PNG 角色素材；其他主题保留 SVG。角色与品牌主题为非官方设计。
+右上角「自定义」→「卡片主题」即可切换。每套包含配色、控件样式、主题字体排版和内置插画。标题、中文译文、正文、标签和设置控件随主题变化；音标保持常规字体。使用 Windows 已安装字体，缺失时自动回退。咱们裸熊、Hello Kitty 和伙伴、Chiikawa 使用 AI 生成的 PNG 角色素材；其他主题保留 SVG。角色与品牌主题为非官方设计。
 
 ![六套卡片主题，使用示例文本](主题总览.png)
 

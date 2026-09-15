@@ -4,6 +4,8 @@ using System.Reflection;
 using System.Xml.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Collections.Generic;
 namespace LinguaSelect {
 public class CardTheme {
  public string Id,Name,Subtitle,Top,Bottom,Ink,Muted,Accent,Soft,Panel,Line,Font;
@@ -22,7 +24,14 @@ static class Themes {
  static XDocument Load(){using(var s=Assembly.GetExecutingAssembly().GetManifestResourceStream("LinguaSelect.themes.svg"))return XDocument.Load(s);}
  public static CardTheme Get(string id){return All.FirstOrDefault(t=>t.Id==id)??All[0];}
  public static SolidColorBrush Brush(string color){return new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));}
- public static DrawingImage Illustration(string id){
+ static readonly Dictionary<string,ImageSource> images=new Dictionary<string,ImageSource>();
+ public static ImageSource Illustration(string id){
+  ImageSource cached;if(images.TryGetValue(id,out cached))return cached;
+  if(id=="bears"||id=="kitty"||id=="chiikawa"){
+   using(var stream=Assembly.GetExecutingAssembly().GetManifestResourceStream("LinguaSelect.themes."+id+".png")){
+    var bitmap=new BitmapImage();bitmap.BeginInit();bitmap.CacheOption=BitmapCacheOption.OnLoad;bitmap.DecodePixelWidth=600;bitmap.StreamSource=stream;bitmap.EndInit();bitmap.Freeze();images[id]=bitmap;return bitmap;
+   }
+  }
   var symbol=art.Descendants().First(x=>x.Name.LocalName=="symbol"&&(string)x.Attribute("id")==id);var drawing=new DrawingGroup();
   drawing.Children.Add(new GeometryDrawing(Brushes.Transparent,null,new RectangleGeometry(new Rect(0,0,180,80))));
   foreach(var p in symbol.Elements()){
@@ -35,7 +44,7 @@ static class Themes {
    string fill=(string)p.Attribute("fill"),stroke=(string)p.Attribute("stroke");Pen pen=stroke==null||stroke=="none"?null:new Pen(Brush(stroke),p.Attribute("stroke-width")==null?1.8:N(p,"stroke-width")){StartLineCap=PenLineCap.Round,EndLineCap=PenLineCap.Round,LineJoin=PenLineJoin.Round};
    drawing.Children.Add(new GeometryDrawing(fill==null||fill=="none"?null:Brush(fill),pen,geo));
   }
-  drawing.Freeze();return new DrawingImage(drawing);
+  drawing.Freeze();var vector=new DrawingImage(drawing);vector.Freeze();images[id]=vector;return vector;
  }
  static double N(XElement e,string n){return e.Attribute(n)==null?0:double.Parse((string)e.Attribute(n),System.Globalization.CultureInfo.InvariantCulture);}
 }

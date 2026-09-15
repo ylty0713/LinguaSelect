@@ -134,7 +134,7 @@ class GlassWindow : Window {
   shell.Resources["Ink"]=Themes.Brush(theme.Ink);shell.Resources["Muted"]=Themes.Brush(theme.Muted);shell.Resources["AccentBrush"]=Themes.Brush(theme.Accent);shell.Resources["AccentSoftBrush"]=Themes.Brush(theme.Soft);shell.Resources["PanelBrush"]=Themes.Brush(theme.Panel);shell.Resources["LineBrush"]=Themes.Brush(theme.Line);
   Foreground=Themes.Brush(theme.Ink);FontFamily=new FontFamily(theme.Font);foreach(var pen in iconPens){pen.Brush=Themes.Brush(theme.Muted);pen.Thickness=theme.Id=="doodle"?2.1:1.65;}
   var example=Find<Border>("ExampleSurface");example.CornerRadius=new CornerRadius(theme.Id=="google"?18:theme.Id=="doodle"?5:12);example.BorderThickness=new Thickness(theme.Id=="doodle"?1.7:1);
-  Find<Image>("ThemeArt").Source=Themes.Illustration(theme.Id);Set("ThemeName",theme.Name);Set("ThemeSubtitle",theme.Subtitle);Visible("ThemeBanner",theme.Id!="ios");
+  Find<Image>("ThemeArt").Source=Themes.Illustration(theme.Id);Find<Border>("ThemeBanner").Background=Themes.Brush(theme.Id=="bears"?"#FFFDF6":theme.Id=="kitty"||theme.Id=="chiikawa"?"#FFFFFF":theme.Panel);Set("ThemeName",theme.Name);Set("ThemeSubtitle",theme.Subtitle);Visible("ThemeBanner",theme.Id!="ios");
   Find<TextBlock>("Original").FontWeight=theme.Id=="google"?FontWeights.Medium:FontWeights.SemiBold;
   if(pinButton!=null)pinButton.Background=pinned?Themes.Brush(theme.Soft):Brushes.Transparent;if(settingsButton!=null)settingsButton.Background=preferences?Themes.Brush(theme.Soft):Brushes.Transparent;
   foreach(var b in themeButtons){var t=(CardTheme)b.Tag;b.Background=Themes.Brush(t.Id==theme.Id?t.Soft:t.Panel);var text=((StackPanel)((Grid)b.Content).Children[1]).Children[0] as TextBlock;text.Text=t.Name+(t.Id==theme.Id?" ✓":"");}

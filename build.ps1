@@ -15,6 +15,9 @@ $arguments += Join-Path $PSScriptRoot 'GlassWindow.cs'
 $arguments += Join-Path $PSScriptRoot 'ServicePresets.cs'
 $arguments += Join-Path $PSScriptRoot 'Themes.cs'
 $arguments += "/resource:$PSScriptRoot\themes.svg,LinguaSelect.themes.svg"
+foreach ($theme in @('bears','kitty','chiikawa')) {
+    $arguments += "/resource:$PSScriptRoot\assets\themes\$theme.png,LinguaSelect.themes.$theme.png"
+}
 $arguments += "/resource:$PSScriptRoot\Card.xaml,LinguaSelect.Card.xaml"
 $arguments += "/resource:$PSScriptRoot\icons.svg,LinguaSelect.icons.svg"
 $arguments += "/win32manifest:$PSScriptRoot\app.manifest"

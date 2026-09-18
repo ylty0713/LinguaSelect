@@ -6,7 +6,7 @@
 
 ## 下载与运行
 
-在本仓库的 **Releases** 下载 `LinguaSelect-v2.4.0-Windows.zip`，解压后双击 `LinguaSelect.exe`。
+在本仓库的 **Releases** 下载 `LinguaSelect-v2.5.0-Windows.zip`，解压后双击 `LinguaSelect.exe`。
 
 - Windows 10 / 11，需 .NET Framework 4.8。
 - Windows 11 22H2 及以后支持系统 Acrylic 背景；其他环境使用半透明卡片回退。
@@ -15,6 +15,7 @@
 ## 功能
 
 - 划词后直接查询，不抢走原软件焦点。
+- 设置顶部可开关「开机启动」，登录 Windows 后静默驻留托盘，仅对当前用户生效。
 - 翻译、音标、系统语音朗读、词典释义、双语例句和 AI 句式解析。
 - 原文、音标、译文、释义、例句、句式六个模块独立开关。
 - 六套主题：默认 iOS 玻璃、咱们裸熊、Hello Kitty 和伙伴、Google Material、卡通涂鸦、Chiikawa。主题即时切换并自动保存。

@@ -35,6 +35,7 @@
     </StackPanel>
     <StackPanel x:Name="Preferences" Visibility="Collapsed">
      <TextBlock x:Name="PreferencesTitle" Text="你的卡片，你来定义。" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,5"/><TextBlock Text="内容与外观实时生效" FontSize="11" Foreground="{DynamicResource Muted}" Margin="0,0,0,14"/>
+     <Border CornerRadius="12" Background="{DynamicResource PanelBrush}" Padding="12,7" Margin="0,0,0,14"><StackPanel><CheckBox x:Name="StartupOption" Content="开机启动"/><TextBlock x:Name="StartupHint" Text="登录 Windows 后自动运行，静默驻留托盘。" FontSize="10" Foreground="{DynamicResource Muted}" Margin="0,3,0,4"/></StackPanel></Border>
      <TextBlock Text="卡片主题" Style="{StaticResource Caption}"/><WrapPanel x:Name="ThemeGallery" Margin="0,0,0,12"/><TextBlock Text="主题切换立即生效，下次启动自动保留。" FontSize="10" Foreground="{DynamicResource Muted}" Margin="0,0,0,14"/>
      <Border CornerRadius="12" Background="{DynamicResource PanelBrush}" Padding="12" Margin="0,0,0,14"><StackPanel>
       <TextBlock Text="翻译服务" Style="{StaticResource Caption}"/><ComboBox x:Name="Service" Margin="0,0,0,10"/>

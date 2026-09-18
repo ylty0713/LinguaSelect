@@ -29,8 +29,10 @@ static class Program {
   if(args.Contains("--theme-preview")) { GlassWindow.ThemePreview(); return; }
   if(args.Contains("--self-test")) { Tests.Run(args.Contains("--network")); return; }
   bool first; using(var mutex = new Mutex(true,"Local\\LinguaSelect.Desktop",out first)) {
-   if(!first) { MessageBox.Show("划词助手已在运行，请在系统托盘中打开。", "LinguaSelect"); return; }
-   new System.Windows.Application().Run(new GlassWindow());
+   if(!first) { if(!args.Contains("--startup"))MessageBox.Show("划词助手已在运行，请在系统托盘中打开。", "LinguaSelect"); return; }
+   var app=new System.Windows.Application();var window=new GlassWindow();
+   if(args.Contains("--startup")){app.MainWindow=window;new System.Windows.Interop.WindowInteropHelper(window).EnsureHandle();app.Run();}
+   else app.Run(window);
   }
  }
 }
@@ -175,6 +177,13 @@ static class Tests {
   check("Same-language shortcut",Provider.Translate("hello","en","en",CancellationToken.None).GetAwaiter().GetResult()=="hello");
   try{Provider.Translate(new string('x',501),"en","zh-CN",CancellationToken.None).GetAwaiter().GetResult();check("Provider byte limit",false);}catch{check("Provider byte limit",true);}
   check("Own process excluded",!Native.Allowed(Process.GetCurrentProcess().MainWindowHandle,cfg));
+  string testKey=@"Software\LinguaSelect\Tests\"+Guid.NewGuid().ToString("N");
+  try{using(var key=Microsoft.Win32.Registry.CurrentUser.CreateSubKey(testKey)){
+   string testExe=Path.Combine(Path.GetTempPath(),"Lingua 测试 Space","LinguaSelect.exe");key.SetValue("Unrelated","keep");
+   Startup.Write(key,testExe,true);check("Startup supports spaces and Unicode",Startup.Matches(key,testExe)&&(string)key.GetValue("LinguaSelect")=="\""+testExe+"\" --startup");
+   Startup.Write(key,testExe,true);check("Startup enable is idempotent",key.GetValueNames().Length==2);
+   Startup.Write(key,testExe,false);Startup.Write(key,testExe,false);check("Startup disable preserves unrelated entries",!Startup.Matches(key,testExe)&&(string)key.GetValue("Unrelated")=="keep");
+  }}catch(Exception ex){check("Startup registry operations",false);lines.Add(ex.Message);}finally{Microsoft.Win32.Registry.CurrentUser.DeleteSubKeyTree(testKey,false);}
   var answer=Provider.ParseAI("```json\n{\"translation\":\"你好\",\"details\":\"问候\",\"examples\":\"Hello! 你好！\"}\n```","test.invalid");check("Fenced AI JSON",answer.Translation=="你好");
   try {Provider.ParseAI("{\"translation\":\"incomplete\"}","test.invalid");check("Reject incomplete AI result",false);}catch{check("Reject incomplete AI result",true);}
   try {Provider.ParseAI("not json","test.invalid");check("Reject malformed AI result",false);}catch{check("Reject malformed AI result",true);}

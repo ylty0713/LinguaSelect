@@ -14,6 +14,7 @@ $arguments += Join-Path $PSScriptRoot 'LinguaSelect.cs'
 $arguments += Join-Path $PSScriptRoot 'GlassWindow.cs'
 $arguments += Join-Path $PSScriptRoot 'ServicePresets.cs'
 $arguments += Join-Path $PSScriptRoot 'Themes.cs'
+$arguments += Join-Path $PSScriptRoot 'Startup.cs'
 $arguments += "/resource:$PSScriptRoot\themes.svg,LinguaSelect.themes.svg"
 foreach ($theme in @('bears','kitty','chiikawa')) {
     $arguments += "/resource:$PSScriptRoot\assets\themes\$theme.png,LinguaSelect.themes.$theme.png"

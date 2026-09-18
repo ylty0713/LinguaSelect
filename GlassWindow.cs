@@ -88,6 +88,8 @@ class GlassWindow : Window {
  }
  void SetupPreferences(){
   SetupThemeGallery();
+  RefreshStartup();
+  Find<CheckBox>("StartupOption").Click+=(s,e)=>{if(testing){RefreshStartup();return;}try{Startup.SetEnabled(Find<CheckBox>("StartupOption").IsChecked==true);RefreshStartup();}catch{RefreshStartup();Set("StartupHint","设置失败：请检查系统权限或安全软件限制后重试。");}};
   string[] fields={"ShowOriginal","ShowPhonetic","ShowTranslation","ShowDetails","ShowExamples","ShowStructure"};
   string[] names={"原文与朗读","音标","译文","多种释义","双语例句","句式与搭配"};
   for(int i=0;i<fields.Length;i++){var field=typeof(Settings).GetField(fields[i]);var c=new CheckBox {Content=names[i],IsChecked=(bool)field.GetValue(cfg)};c.Click+=(s,e)=>{field.SetValue(cfg,c.IsChecked==true);Save();Render();};Find<StackPanel>("ModuleOptions").Children.Add(c);}
@@ -97,6 +99,9 @@ class GlassWindow : Window {
   var languages=Find<ComboBox>("Language");languages.ItemsSource=Provider.Languages;languages.SelectedIndex=cfg.Target;languages.SelectionChanged+=(s,e)=>{cfg.Target=languages.SelectedIndex;Save();cache.Clear();if(currentText!="")StartLookup(currentText);else Render();};
   var voices=Find<ComboBox>("Voice");try{speech=new SpeechSynthesizer();var all=speech.GetInstalledVoices().Where(v=>v.Enabled).ToList();voices.ItemsSource=all.Select(v=>v.VoiceInfo.Name).ToList();int idx=all.FindIndex(v=>v.VoiceInfo.Culture.Name=="en-US");if(idx<0)idx=all.FindIndex(v=>v.VoiceInfo.Culture.TwoLetterISOLanguageName=="en");if(all.Count>0)voices.SelectedIndex=Math.Max(0,idx);}catch{}
   SetupServicePresets();
+ }
+ void RefreshStartup(){
+  var option=Find<CheckBox>("StartupOption");try{option.IsChecked=!testing&&Startup.Enabled;option.IsEnabled=true;Set("StartupHint",option.IsChecked==true?"已开启 · 登录后静默驻留托盘。请保留当前程序位置。":"登录 Windows 后自动运行，静默驻留托盘。");}catch{option.IsChecked=false;option.IsEnabled=false;Set("StartupHint","无法读取 Windows 启动设置，请检查系统权限。");}
  }
  void SetupServicePresets(){
   Find<TextBox>("Endpoint").Text=cfg.ServiceId=="custom"?cfg.Endpoint:"";Find<TextBox>("Model").Text=cfg.ServiceId=="custom"?cfg.Model:"";Find<TextBox>("Excluded").Text=cfg.Excluded;
@@ -159,7 +164,7 @@ class GlassWindow : Window {
   }
   foreach(var name in new[]{"Endpoint","Model","Input"})Find<TextBox>(name).FontFamily=new FontFamily("Segoe UI, Microsoft YaHei UI");
  }
- void TogglePreferences(bool? value=null){preferences=value??!preferences;Visible("Preferences",preferences);Visible("Reading",!preferences);settingsButton.Background=preferences?(Brush)shell.Resources["AccentSoftBrush"]:Brushes.Transparent;Set("Mode",preferences?" /  个性化":" /  划词即译");Fit();}
+ void TogglePreferences(bool? value=null){preferences=value??!preferences;if(preferences)RefreshStartup();Visible("Preferences",preferences);Visible("Reading",!preferences);settingsButton.Background=preferences?(Brush)shell.Resources["AccentSoftBrush"]:Brushes.Transparent;Set("Mode",preferences?" /  个性化":" /  划词即译");Fit();}
  void SetupThemeGallery(){
   foreach(var theme in Themes.All){var t=theme;var grid=new Grid();grid.ColumnDefinitions.Add(new ColumnDefinition {Width=new GridLength(58)});grid.ColumnDefinitions.Add(new ColumnDefinition());grid.Children.Add(new Image {Source=Themes.Illustration(t.Id),Width=57,Height=42});
    var labels=new StackPanel {VerticalAlignment=VerticalAlignment.Center,Margin=new Thickness(5,0,0,0)};labels.Children.Add(new TextBlock {Text=t.Name,FontFamily=new FontFamily(Themes.Typography(t.Id).UI),FontSize=10,FontWeight=FontWeights.SemiBold,Foreground=Themes.Brush(t.Ink),TextWrapping=TextWrapping.Wrap});labels.Children.Add(new TextBlock {Text=Themes.Typography(t.Id).Label,FontFamily=new FontFamily(Themes.Typography(t.Id).UI),FontSize=9,Foreground=Themes.Brush(t.Muted),Margin=new Thickness(0,4,0,0)});Grid.SetColumn(labels,1);grid.Children.Add(labels);
